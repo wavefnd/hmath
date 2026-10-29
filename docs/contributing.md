@@ -70,3 +70,12 @@ released wheel, and complete Haskell example programs against this checkout.
 Run the C/Wave example programs with the native build when changing them.
 The home-page version is substituted from `pyproject.toml` during generation;
 documentation changes alone do not require a package release.
+
+
+## Additional Python documentation guidance
+
+The Python reference follows [numpydoc content conventions](https://numpydoc.readthedocs.io/en/stable/format.html) adapted to the existing Markdown layout. Keep the current `Parameters`, `Returns`, and `See also` headings required by the source-derived checker. For classes and properties, preserve these sections while documenting public attributes, ownership, and access behavior in the accompanying prose; do not change the build or checking tools for a documentation-only improvement.
+
+Document finite binary64 behavior, exact shape and rank restrictions, exception types and status codes, and the distinction between mathematical definitions and implementation-specific numerical properties. Derive claims from the actual public binding and native kernel path. Never infer Python features from Haskell-only APIs, and do not claim NumPy compatibility for operations with different semantics.
+
+Include standalone imports in extended examples and clearly state the expected result or checked failure. The existing Python documentation checker executes all `python` fences from a Markdown file sequentially in one shared namespace; use `text` rather than `python` for irreversible runtime-shutdown demonstrations. Existing source signatures and section headings must remain stable so documentation changes pass the unchanged CI checks.
